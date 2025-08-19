@@ -30,3 +30,6 @@ input[type=number] {
   margin: 2rem 0;
 }
 
+.form-check-label {
+  margin-left: 0.25rem;
+}
