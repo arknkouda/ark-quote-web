@@ -1,9 +1,416 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>見積web</title>
-    </head>
-    <body>
-        古宇田です
-    </body>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>見積Web</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">見積web</h1>
+    <p class="text-center text-muted small">
+      通常は＊以外すべて必須項目<br>
+      ＊は宛先がリコージャパン株式会社の場合必須項目になる。
+    </p>
+
+    <form>
+      <!-- 基本情報 -->
+      <fieldset class="mb-4">
+        <legend>基本情報</legend>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="companySelect" class="form-label required">作成会社</label>
+            <select id="companySelect" name="company" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="sd">株式会社親幸電設</option>
+              <option value="af">株式会社アークフォレスト</option>
+              <option value="ak">株式会社アーク空調設備</option>
+              <option value="at">株式会社アーク通信設備</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="creatorSelect" class="form-label required">作成者</label>
+            <select id="creatorSelect" name="creator" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="nb">平林 信通</option>
+              <option value="ts">曽根 智也</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="destinationSelect" class="form-label required">宛先</label>
+            <select id="destinationSelect" name="destination" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="ric">リコージャパン株式会社</option>
+              <option value="sai">株式会社サイホー</option>
+              <option value="irh">株式会社奥本いろは堂</option>
+              <option value="knd">株式会社カナデン</option>
+              <option value="lnt">株式会社リブ・ネクスト</option>
+              <option value="snt">株式会社新日通</option>
+              <option value="gne">株式会社GNE</option>
+              <option value="umu">株式会社ウム・ヴェルト・ジャパン</option>
+              <option value="umj">ウム・ヴェルト株式会社</option>
+              <option value="rik">株式会社力</option>
+              <option value="etj">エコ・トラスト・ジャパン株式会社</option>
+              <option value="khs">株式会社紀鳳産業</option>
+              <option value="koi">コイズミ照明株式会社</option>
+              <option value="iri">アイリスオーヤマ株式会社</option>
+              <option value="ens">株式会社遠藤照明</option>
+              <option value="lux">株式会社ルクス</option>
+              <option value="ecp">株式会社エコプラン</option>
+              <option value="iws">岩崎電気株式会社</option>
+              <option value="kdk">株式会社関電工</option>
+              <option value="tkd">東光電気工事株式会社</option>
+              <option value="tkt">株式会社TKテクノサービス</option>
+              <option value="tnt">株式会社ティーネットジャパン</option>
+              <option value="mza">株式会社三井造船昭島研究所</option>
+              <option value="dkn">ダイキンHVACソリューション東京株式会社</option>
+              <option value="nsd">有限会社南信堂</option>
+              <option value="lbt">株式会社リバティ</option>
+              <option value="fgk">株式会社フジクラエンジニアリング</option>
+              <option value="esm">イーシームズ株式会社</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="contactSelect" class="form-label required">担当者</label>
+            <select id="contactSelect" name="contact" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="i">【ﾘｺｰ首都圏】石井 猛</option>
+              <option value="s">【ﾘｺｰ首都圏】志賀 孝浩</option>
+              <option value="y">【新日通】山中 浩</option>
+              <option value="k">【ﾘｸﾞﾈｸｽﾄ】小林 一路</option>
+              <option value="s">【いろは堂】染矢 剛</option>
+              <option value="h">【いろは堂】日高 重夫</option>
+              <option value="t">【いろは堂】奥本 哲也</option>
+              <option value="s">【いろは堂】島村 岳士</option>
+              <option value="ss">【ｶﾅﾃﾞﾝ】佐々木 翔平</option>
+              <option value="f">【ｶﾅﾃﾞﾝ】古谷 暁</option>
+              <option value="m">【ｶﾅﾃﾞﾝ】松田 壮亮</option>
+              <option value="sk">【ｶﾅﾃﾞﾝ】坂口 恭祐</option>
+              <option value="h">【ｶﾅﾃﾞﾝ】原田 遼</option>
+              <option value="sn">【ｶﾅﾃﾞﾝ】佐藤 伸佳</option>
+              <option value="n">【ﾘｺｰ西東京】根岸 徹</option>
+              <option value="k">【ﾘｺｰ西東京】小山 恒治</option>
+              <option value="f">【ﾘｺｰ群馬】藤野 智史</option>
+              <option value="i">【ﾘｺｰ群馬】池田 淳一</option>
+              <option value="t">【ﾘｺｰ群馬】田村</option>
+              <option value="w">【ﾘｺｰ群馬】渡辺 和弘</option>
+              <option value="t">【ｻｲﾎｰ】戸野塚 直樹</option>
+              <option value="i">【ｻｲﾎｰ】今田 猛</option>
+              <option value="s">【ｻｲﾎｰ】坂本 憲司</option>
+              <option value="og">【GNE】小川 佳彦</option>
+              <option value="y">【GNE】山田 浩貴</option>
+              <option value="ot">【GNE】太田</option>
+              <option value="k">【GNE】柿本</option>
+              <option value="n">【GNE】中村</option>
+              <option value="t">【GNE】高岡 裕</option>
+              <option value="f">【ｳﾑﾍﾞﾙﾄ】藤本 幸大</option>
+              <option value="y">【ｳﾑﾍﾞﾙﾄ】横田 晋宏</option>
+              <option value="h">【三井造船】橋本 聡明</option>
+              <option value="u">【ﾘｺｰ千葉】内村 嘉朗</option>
+              <option value="i">【ﾘｺｰ埼玉】石川</option>
+              <option value="o">【ﾘｺｰ首都圏】大久保 博文</option>
+              <option value="a">【ﾘｺｰ首都圏】安喰 和弘</option>
+              <option value="k">【ﾘｺｰ首都圏】小針 重雄</option>
+              <option value="a">【ﾘｺｰ首都圏】青木 正人</option>
+              <option value="n">【ﾘｺｰ首都圏】長見 篤也</option>
+              <option value="s">【ﾘｺｰ神奈川】坂入</option>
+              <option value="e">その他</option>
+              <option value="s">佐々木幸夫</option>
+              <option value="n">ﾙｸｽ根岸 武彦</option>
+              <option value="s">ﾙｸｽ糴川 毅史</option>
+              <option value="a">ﾙｸｽ朝倉 智孝</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <hr class="section-divider">
+
+      <fieldset class="mb-4">
+        <legend>見積番号</legend>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="limitDate" class="form-label">見積期限日</label>
+            <input type="date" class="form-control" id="limitDate" name="limitDate">
+            <p class="text-note">※ 見積日から3か月後に自動入力されます。</p>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo" class="form-label">見積番号</label>
+            <input type="text" class="form-control" id="estimateNo" name="estimateNo" placeholder="AKAK250101AKAK">
+            <p class="text-note">※ 見積番号①~⑥に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo1" class="form-label">見積番号①</label>
+            <input type="text" class="form-control" id="estimateNo1" name="estimateNo1" placeholder="AK">
+            <p class="text-note">※ 作成会社に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo2" class="form-label">見積番号②</label>
+            <input type="text" class="form-control" id="estimateNo2" name="estimateNo2">
+            <p class="text-note">※ 宛先に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo3" class="form-label">見積番号③</label>
+            <input type="text" class="form-control" id="estimateNo3" name="estimateNo3">
+            <p class="text-note">※ 見積日に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo4" class="form-label required">見積番号④</label>
+            <input type="text" class="form-control" id="estimateNo4" name="estimateNo4" placeholder="01" required>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo5" class="form-label">見積番号⑤</label>
+            <input type="text" class="form-control" id="estimateNo5" name="estimateNo5">
+            <p class="text-note">※ 作成者に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo6" class="form-label">見積番号⑥</label>
+            <input type="text" id="estimateNo6" name="estimateNo6" class="form-control" readonly />
+            <p class="text-note">※ 宛先と担当者に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-4">
+            <label for="estimateNo7" class="form-label required">枝番⑦</label>
+            <input type="text" class="form-control" id="estimateNo7" name="estimateNo7" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <hr class="section-divider">
+
+      <!-- 工事情報 -->
+      <fieldset class="mb-4">
+        <legend>工事情報</legend>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="workCompany" class="form-label required">会社名</label>
+            <input type="text" class="form-control" id="workCompany" name="workCompany" required>
+          </div>
+          <div class="col-md-6">
+            <label for="workAddress" class="form-label required">住所</label>
+            <input type="text" class="form-control" id="workAddress" name="workAddress" required>
+          </div>
+          <div class="col-md-6">
+            <label for="estimateDate" class="form-label required">見積日</label>
+            <input type="date" class="form-control" id="estimateDate" name="estimateDate" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label required">概要</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="summary1" name="summary" value="migencho" required>
+                <label class="form-check-label" for="summary1">概算・未現調</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="summary2" name="summary" value="gaisan">
+                <label class="form-check-label" for="summary2">概算</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="workContent" class="form-label">内容</label>
+            <input type="text" class="form-control" id="workContent" name="workContent" required>
+            <p class="text-note">※ 工事種類に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-6">
+            <label for="workDetail" class="form-label required">詳細</label>
+            <input type="text" class="form-control" id="workDetail" name="workDetail" required>
+          </div>
+          <div class="col-md-4">
+            <label for="workTypeSelect" class="form-label required">工事連日・単発</label>
+            <select id="workTypeSelect" name="workType" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="renjitsu">単発</option>
+              <option value="tanpatsu">連日</option>
+              <option value="doniti">土日連日</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="startDate" class="form-label required">工事開始日</label>
+            <input type="date" class="form-control" id="startDate" name="startDate" required>
+          </div>
+          <div class="col-md-4">
+            <label for="deliveryDate" class="form-label required">納品日</label>
+            <input type="date" class="form-control" id="deliveryDate" name="deliveryDate" required>
+          </div>
+          <div class="col-md-4">
+            <label for="distanceSelect" class="form-label required">距離</label>
+            <select id="distanceSelect" name="distance" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="Long">遠距離</option>
+              <option value="Medium ">中距離</option>
+              <option value="Short">近距離</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="environmentSelect" class="form-label required">環境</label>
+            <select id="environmentSelect" name="environment" class="form-select" required>
+              <option value="">選択してください</option>
+              <option value="office">事務所</option>
+              <option value="store">店舗</option>
+              <option value="factory">工場</option>
+              <option value="warehouse">倉庫</option>
+              <option value="other">その他</option>
+           </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label required">産廃</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="sanpai1" name="sanpai" value="no" required>
+                <label class="form-check-label" for="sanpai1">マニフェスト不要</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="sanpai2" name="sanpai" value="yes">
+                <label class="form-check-label" for="sanpai2">マニフェスト必要</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <hr class="section-divider">
+
+      <!-- 年末年始・年度末 -->
+        <div class="row mb-3">
+          <div class="col-md-6 d-flex align-items-center">
+            <label for="form-check-label" for="check1">年末年始</label>
+            <input class="form-check-input" type="checkbox" id="check1" name="yearEndHoliday">
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <label class="form-check-label" for="check2">年度末</label>
+            <input class="form-check-input" type="checkbox" id="check2" name="yearEndHoliday">
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 工事種類 -->
+        <div class="col-md-4">
+          <legend>工事種類</legend>
+          <div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="koujiType1" name="koujiType" required>
+              <label class="form-check-label" for="koujiType1">電気工事</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="koujiType2" name="koujiType">
+              <label class="form-check-label" for="koujiType2">空調工事</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 資材チェック -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-check">
+                <label for="materialA" class="form-check-label">A材・非常灯・照明器具</label>
+                <input type="checkbox" id="materialA" name="material" value="A材" class="form-check-input">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <label for="materialB" class="form-check-label">B材・電材・材料等</label>
+                <input type="checkbox" id="materialB" name="material" value="B材" class="form-check-input">
+            </div>
+          </div>
+
+          <!-- 高所作業車 -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-check">
+                <label for="highLift" class="form-check-label">高所作業車</label>
+                <input type="checkbox" id="highLift" name="equipment" value="高所作業車" class="form-check-input">
+              </div>
+            </div>
+          </div>
+
+
+      <hr class="section-divider">
+
+      <!-- 注文情報 -->
+      <fieldset class="mb-4">
+        <legend>注文情報</legend>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="orderFromSelect" class="form-label">＊注文元</label>
+            <select id="orderFromSelect" name="orderFrom" class="form-select">
+              <option value="">選択してください</option>
+              <option value="tokyo">東京</option>
+              <option value="gunma">群馬</option>
+              <option value="nisitokyo">西東京</option>
+              <option value="kanagawa">神奈川</option>
+              <option value="chiba">千葉</option>
+              <option value="saitama">埼玉</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="orderNumber1" class="form-label">＊注文番号1</label>
+            <input type="text" id="orderNumber1" name="orderNumber1" class="form-control">
+            <p class="text-note">※ 注文元に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-6">
+            <label for="orderNumberFull" class="form-label">＊注文番号</label>
+            <input type="text" id="orderNumberFull" name="orderNumberFull" class="form-control" placeholder="000-js0000000000">
+            <p class="text-note">※ 宛先と注文番号1と注文番号2に応じて自動入力されます。</p>
+          </div>
+          <div class="col-md-6">
+            <label for="orderNumber2" class="form-label">＊注文番号2</label>
+            <input type="text" id="orderNumber2" name="orderNumber2" class="form-control" placeholder="0000000000">
+        </div>
+      </fieldset>
+
+      <hr class="section-divider">
+
+      <!-- その他 -->
+        <!-- 値引き -->
+          <div class="col-md-3">
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="discountCheck" class="me-2 mb-0">値引き</label>
+              <input type="checkbox" id="discountCheck" name="discountCheck" class="form-check-input">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="discountAmount" class="form-label visually-hidden">値引き金額</label>
+            <div class="input-group mt-4">
+              <span class="input-group-text">¥</span>
+              <input type="number" id="discountAmount" name="discountAmount" class="form-control" placeholder="150" disabled>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <!-- 行程管理票 -->
+          <div class="col-md-3">
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="processSheet" class="mb-0">行程管理票</label>
+              <input type="checkbox" id="processSheet" name="processSheet" class="form-check-input me-2">
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <!-- 産廃の有無 -->
+          <div class="col-md-3">
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="sanpaiPresence" class="mb-0">産廃の有無</label>
+              <input type="checkbox" id="sanpaiPresence" name="sanpaiPresence" class="form-check-input me-2">
+            </div>
+          </div>
+
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-warning">入力完了</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="main.js"></script>
+</body>
 </html>
