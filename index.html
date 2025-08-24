@@ -135,41 +135,41 @@
         <div class="row g-3">
           <div class="col-md-4">
             <label for="limitDate" class="form-label">見積期限日</label>
-            <input type="date" class="form-control" id="limitDate" name="limitDate">
+            <input type="date" class="form-control" id="limitDate" name="limitDate" readonly>
             <p class="text-note">※ 見積日から3か月後に自動入力されます。</p>
           </div>
           <div class="col-md-4">
             <label for="estimateNo" class="form-label">見積番号</label>
-            <input type="text" class="form-control" id="estimateNo" name="estimateNo" placeholder="AKAK250101AKAK">
-            <p class="text-note">※ 見積番号①~⑥に応じて自動入力されます。</p>
+            <input type="text" class="form-control" id="estimateNo" name="estimateNo" readonly>
+            <p class="text-note">※ 見積番号①～⑥に応じて自動入力されます。枝番が入力されている場合、見積番号の末尾に自動で追加されます。</p>
           </div>
           <div class="col-md-4">
             <label for="estimateNo1" class="form-label">見積番号①</label>
-            <input type="text" class="form-control" id="estimateNo1" name="estimateNo1" placeholder="AK">
+            <input type="text" class="form-control" id="estimateNo1" name="estimateNo1" readonly>
             <p class="text-note">※ 作成会社に応じて自動入力されます。</p>
           </div>
           <div class="col-md-4">
             <label for="estimateNo2" class="form-label">見積番号②</label>
-            <input type="text" class="form-control" id="estimateNo2" name="estimateNo2">
+            <input type="text" class="form-control" id="estimateNo2" name="estimateNo2" readonly>
             <p class="text-note">※ 宛先に応じて自動入力されます。</p>
           </div>
           <div class="col-md-4">
             <label for="estimateNo3" class="form-label">見積番号③</label>
-            <input type="text" class="form-control" id="estimateNo3" name="estimateNo3">
+            <input type="text" class="form-control" id="estimateNo3" name="estimateNo3" readonly>
             <p class="text-note">※ 見積日に応じて自動入力されます。</p>
           </div>
           <div class="col-md-4">
             <label for="estimateNo4" class="form-label required">見積番号④</label>
-            <input type="text" class="form-control" id="estimateNo4" name="estimateNo4" placeholder="01" required>
+            <input type="text" class="form-control" id="estimateNo4" name="estimateNo4" required>
           </div>
           <div class="col-md-4">
             <label for="estimateNo5" class="form-label">見積番号⑤</label>
-            <input type="text" class="form-control" id="estimateNo5" name="estimateNo5">
+            <input type="text" class="form-control" id="estimateNo5" name="estimateNo5" readonly>
             <p class="text-note">※ 作成者に応じて自動入力されます。</p>
           </div>
           <div class="col-md-4">
             <label for="estimateNo6" class="form-label">見積番号⑥</label>
-            <input type="text" id="estimateNo6" name="estimateNo6" class="form-control" readonly />
+            <input type="text" id="estimateNo6" name="estimateNo6" class="form-control" readonly>
             <p class="text-note">※ 宛先と担当者に応じて自動入力されます。リコージャパン株式会社の場合は「注文元」と「担当者」の組み合わせで見積番号が自動設定されます。</p>
           </div>
           <div class="col-md-4">
@@ -187,11 +187,11 @@
         <div class="row g-3">
           <div class="col-md-6">
             <label for="workCompany" class="form-label required">会社名</label>
-            <input type="text" class="form-control" id="workCompany" name="workCompany" required>
+            <input type="text" class="form-control" id="workCompany" name="workCompany" placeholder="株式会社○○○" required>
           </div>
           <div class="col-md-6">
             <label for="workAddress" class="form-label required">住所</label>
-            <input type="text" class="form-control" id="workAddress" name="workAddress" required>
+            <input type="text" class="form-control" id="workAddress" name="workAddress" placeholder="東京都大田区△△△△" required>
           </div>
           <div class="col-md-6">
             <label for="estimateDate" class="form-label required">見積日</label>
@@ -214,7 +214,7 @@
           </fieldset>
           <div class="col-md-6">
             <label for="workContent" class="form-label">内容</label>
-            <input type="text" class="form-control" id="workContent" name="workContent" required>
+            <input type="text" class="form-control" id="workContent" name="workContent" required readonly>
             <p class="text-note">※ 工事種類に応じて自動入力されます。</p>
           </div>
           <div class="col-md-6">
@@ -352,12 +352,12 @@
           </div>
           <div class="col-md-6">
             <label for="orderNumber1" class="form-label">＊注文番号1</label>
-            <input type="text" id="orderNumber1" name="orderNumber1" class="form-control">
+            <input type="text" id="orderNumber1" name="orderNumber1" class="form-control" readonly>
             <p class="text-note">※ 注文元に応じて自動入力されます。</p>
           </div>
           <div class="col-md-6">
             <label for="orderNumberFull" class="form-label">＊注文番号</label>
-            <input type="text" id="orderNumberFull" name="orderNumberFull" class="form-control" placeholder="000-js0000000000">
+            <input type="text" id="orderNumberFull" name="orderNumberFull" class="form-control" placeholder="000-js0000000000" readonly>
             <p class="text-note">※ 宛先と注文番号1と注文番号2に応じて自動入力されます。</p>
           </div>
           <div class="col-md-6">

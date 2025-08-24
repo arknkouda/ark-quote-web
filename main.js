@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 会社選択による見積番号パーツ1設定
+  // 会社選択による見積番号1の自動入力設定
   function setupCompanySelect() {
     const companySelect = document.getElementById("companySelect");
     const estimateNo1 = document.getElementById("estimateNo1");
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 宛先選択による見積番号パーツ2設定
+  // 宛先選択による見積番号2の自動入力設定
   function setupDestinationSelect() {
     const destinationSelect = document.getElementById("destinationSelect");
     const estimateNo2 = document.getElementById("estimateNo2");
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 見積日付から見積番号パーツ3(YYMM)設定
+  // 見積日付から見積番号3(YYMM)の自動入力設定
   function setupEstimateNo3() {
     const estimateDateInput = document.getElementById("estimateDate");
     const estimateNo3Input = document.getElementById("estimateNo3");
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 作成者選択による見積番号パーツ5設定
+  // 作成者選択による見積番号5の自動入力設定
   function setupCreatorSelect() {
     const creatorSelect = document.getElementById("creatorSelect");
     const estimateNo5Input = document.getElementById("estimateNo5");
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-// 受取人＋担当者選択による見積番号パーツ6設定
+// 受取人＋担当者選択による見積番号6の自動入力設定
 function setupEstimateNo6() {
   const recipientSelect = document.getElementById("destinationSelect"); // 宛先（会社名）
   const personSelect = document.getElementById("contactSelect");       // 担当者
@@ -330,4 +330,145 @@ setupDiscountToggle();
   setupEstimateNo3();
   setupCreatorSelect();
   setupEstimateNo6(); // ← ← ← ★★★ これを追加！！
+});
+
+  //見積番号1～6による見積番号の自動入力設定
+document.addEventListener("DOMContentLoaded", () => {
+  const fieldIds = [
+    "estimateNo1",
+    "estimateNo2",
+    "estimateNo3",
+    "estimateNo4",
+    "estimateNo5",
+    "estimateNo6"
+  ];
+
+  const fields = fieldIds.map(id => document.getElementById(id));
+  const estimateNoOutput = document.getElementById("estimateNo");
+  const estimateNo7 = document.getElementById("estimateNo7"); // 枝番
+
+  function updateEstimateNo() {
+    const values = fields.map(field => field?.value.trim() || "");
+    const allFilled = values.every(val => val !== "");
+
+    if (allFilled) {
+      let fullEstimateNo = values.join("");
+
+      const extra = estimateNo7?.value.trim();
+      if (extra) {
+        fullEstimateNo += extra; // 枝番も追加（ハイフンなし）
+      }
+
+      estimateNoOutput.value = fullEstimateNo;
+    } else {
+      estimateNoOutput.value = "";
+    }
+  }
+
+  // 全フィールドにイベントリスナー追加（枝番も含む）
+  fields.forEach(field => {
+    if (!field) return;
+    field.addEventListener("input", updateEstimateNo);
+    field.addEventListener("change", updateEstimateNo);
+  });
+
+  if (estimateNo7) {
+    estimateNo7.addEventListener("input", updateEstimateNo);
+    estimateNo7.addEventListener("change", updateEstimateNo);
+  }
+
+  // 自動入力にも対応（500msごとにチェック）
+  setInterval(updateEstimateNo, 500);
+});
+
+  //工事種類の選択による内容の自動入力設定
+document.addEventListener("DOMContentLoaded", function () {
+  const workContent = document.getElementById("workContent");
+
+  // ラジオボタンの取得（nameが共通のもの）
+  const koujiRadios = document.querySelectorAll("input[name='koujiType']");
+
+  const koujiContentMap = {
+    "koujiType1": "照明LED化工事",
+    "koujiType2": "空調設備工事"
+  };
+
+  koujiRadios.forEach(radio => {
+    radio.addEventListener("change", function () {
+      if (radio.checked) {
+        const content = koujiContentMap[radio.id] || "";
+        workContent.value = content;
+      }
+    });
+  });
+});
+
+  //注文元の選択による注文番号の自動入力設定
+document.addEventListener("DOMContentLoaded", function () {
+  const orderFromSelect = document.getElementById("orderFromSelect");
+  const orderNumber1 = document.getElementById("orderNumber1");
+
+  const orderNumberMap = {
+    tokyo: "408",
+    gunma: "305",
+    nisitokyo: "403",
+    kanagawa: "405",
+    chiba: "401",
+    saitama: "304"
+  };
+
+  orderFromSelect.addEventListener("change", function () {
+    const selectedValue = orderFromSelect.value;
+    orderNumber1.value = orderNumberMap[selectedValue] || "";
+  });
+});
+
+//宛先と注文元と注文番号1と注文番号2によって注文番号を自動入力する設定
+document.addEventListener('DOMContentLoaded', () => {
+  const destinationSelect = document.getElementById('destinationSelect');  // 宛先
+  const orderNumber1 = document.getElementById('orderNumber1');          // 注文番号1（注文元に応じて自動入力）
+  const orderNumber2 = document.getElementById('orderNumber2');          // 注文番号2（ユーザー入力）
+  const orderFromSelect = document.getElementById('orderFromSelect');    // 注文元
+  const orderNumberFull = document.getElementById('orderNumberFull');    // 完成注文番号（自動生成）
+
+  // 注文元によって注文番号1を自動設定する関数
+  function updateOrderNumber1() {
+    const orderFrom = orderFromSelect.value;
+    // 注文元別の注文番号1のマッピング（例）
+    const orderNumberMap = {
+      tokyo: '408',
+      gunma: '305',
+      nisitokyo: '403',
+      kanagawa: '405',
+      chiba: '401',
+      saitama: '304'
+    };
+
+    orderNumber1.value = orderNumberMap[orderFrom] || '';
+  }
+
+  // 最終注文番号を生成する関数
+  function updateOrderNumberFull() {
+    const destination = destinationSelect.value;
+    const no1 = orderNumber1.value.trim();
+    const no2 = orderNumber2.value.trim();
+
+    if (no2 !== "" && no2 !== "0000000000") {
+      if (destination === "ricoh") {
+        orderNumberFull.value = `${no1}-JS${no2}`;
+      } else {
+        orderNumberFull.value = no2;
+      }
+    } else {
+      orderNumberFull.value = "";
+    }
+  }
+
+  // 初期化や変更時のイベント設定
+  orderFromSelect.addEventListener('change', () => {
+    updateOrderNumber1();
+    updateOrderNumberFull();
+  });
+  orderNumber2.addEventListener('input', updateOrderNumberFull);
+  destinationSelect.addEventListener('change', updateOrderNumberFull);
 });
