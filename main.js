@@ -447,14 +447,19 @@ document.addEventListener('DOMContentLoaded', () => {
     orderNumber1.value = orderNumberMap[orderFrom] || '';
   }
 
-  // 最終注文番号を生成する関数
-  function updateOrderNumberFull() {
-    const destination = destinationSelect.value;
-    const no1 = orderNumber1.value.trim();
-    const no2 = orderNumber2.value.trim();
+document.addEventListener('DOMContentLoaded', () => {
+  const destinationSelect = document.getElementById('destinationSelect'); // 宛先（B4）
+  const orderNumber1 = document.getElementById('orderNumber1');           // 注文番号1（E16）
+  const orderNumber2 = document.getElementById('orderNumber2');           // 注文番号2（E17）
+  const orderNumberFull = document.getElementById('orderNumberFull');     // 出力先
 
-    if (no2 !== "" && no2 !== "0000000000") {
-      if (destination === "ricoh") {
+  function updateOrderNumberFull() {
+    const destination = destinationSelect?.value?.trim() || "";
+    const no1 = orderNumber1?.value?.trim() || "";
+    const no2 = orderNumber2?.value?.trim() || "";
+
+    if (no2 !== "" && no2 !== "0000000000" && no2 !== "000000000") {
+      if (destination === "リコージャパン株式会社") {
         orderNumberFull.value = `${no1}-JS${no2}`;
       } else {
         orderNumberFull.value = no2;
@@ -463,6 +468,35 @@ document.addEventListener('DOMContentLoaded', () => {
       orderNumberFull.value = "";
     }
   }
+
+  destinationSelect?.addEventListener('change', updateOrderNumberFull);
+  orderNumber1?.addEventListener('input', updateOrderNumberFull);
+  orderNumber2?.addEventListener('input', updateOrderNumberFull);
+});
+  function updateOrderNumberFull() {
+  const orderNumber1 = document.getElementById('orderNumber1').value.trim();
+  const orderNumber2 = document.getElementById('orderNumber2').value.trim(); 
+  const destination = document.getElementById('destinationSelect').value.trim(); 
+  const orderNumberFull = document.getElementById('orderNumberFull'); // 出力先
+
+  if (orderNumber2 !== "000000000") {
+    if (destination === "ricoh") {
+      orderNumberFull.value = `${orderNumber1}-JS${orderNumber2}`;
+    } else {
+      orderNumberFull.value = orderNumber2;
+    }
+  } else {
+    orderNumberFull.value = "";
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const destinationSelect = document.getElementById('destinationSelect');
+  const orderNumber2 = document.getElementById('orderNumber2');
+
+  destinationSelect.addEventListener('change', updateOrderNumberFull);
+  orderNumber2.addEventListener('input', updateOrderNumberFull);
+});
 
   // 初期化や変更時のイベント設定
   orderFromSelect.addEventListener('change', () => {
