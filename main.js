@@ -377,10 +377,6 @@ document.addEventListener("DOMContentLoaded", () => {
     estimateNo7.addEventListener("change", updateEstimateNo);
   }
 
-  // 自動入力にも対応（500msごとにチェック）
-  setInterval(updateEstimateNo, 500);
-});
-
   //工事種類の選択による内容の自動入力設定
 document.addEventListener("DOMContentLoaded", function () {
   const workContent = document.getElementById("workContent");
