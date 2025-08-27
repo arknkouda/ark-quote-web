@@ -41,89 +41,90 @@
             </select>
           </div>
           <div class="col-md-6">
-            <label for="destinationSelect" class="form-label required">宛先</label>
-            <select id="destinationSelect" name="destination" class="form-select" required>
-              <option value="">選択してください</option>
-              <option value="ricoh">リコージャパン株式会社</option>
-              <option value="sai">株式会社サイホー</option>
-              <option value="irh">株式会社奥本いろは堂</option>
-              <option value="knd">株式会社カナデン</option>
-              <option value="lnt">株式会社リブ・ネクスト</option>
-              <option value="snt">株式会社新日通</option>
-              <option value="gne">株式会社GNE</option>
-              <option value="umu">株式会社ウム・ヴェルト・ジャパン</option>
-              <option value="umj">ウム・ヴェルト株式会社</option>
-              <option value="rik">株式会社力</option>
-              <option value="etj">エコ・トラスト・ジャパン株式会社</option>
-              <option value="khs">株式会社紀鳳産業</option>
-              <option value="koi">コイズミ照明株式会社</option>
-              <option value="iri">アイリスオーヤマ株式会社</option>
-              <option value="ens">株式会社遠藤照明</option>
-              <option value="lux">株式会社ルクス</option>
-              <option value="ecp">株式会社エコプラン</option>
-              <option value="iws">岩崎電気株式会社</option>
-              <option value="kdk">株式会社関電工</option>
-              <option value="tkd">東光電気工事株式会社</option>
-              <option value="tkt">株式会社TKテクノサービス</option>
-              <option value="tnt">株式会社ティーネットジャパン</option>
-              <option value="mza">株式会社三井造船昭島研究所</option>
-              <option value="dkn">ダイキンHVACソリューション東京株式会社</option>
-              <option value="nsd">有限会社南信堂</option>
-              <option value="lbt">株式会社リバティ</option>
-              <option value="fgk">株式会社フジクラエンジニアリング</option>
-              <option value="esm">イーシームズ株式会社</option>
-            </select>
+            <label for="destinationInput" class="form-label required">宛先</label>
+            <input list="destinationList" id="destinationInput" name="destination" class="form-control" required placeholder="選択してください">
+            
+            <datalist id="destinationList">
+              <option value="リコージャパン株式会社">
+              <option value="株式会社サイホー">
+              <option value="株式会社奥本いろは堂">
+              <option value="株式会社カナデン">
+              <option value="株式会社リブ・ネクスト">
+              <option value="株式会社新日通">
+              <option value="株式会社GNE">
+              <option value="株式会社ウム・ヴェルト・ジャパン">
+              <option value="ウム・ヴェルト株式会社">
+              <option value="株式会社力">
+              <option value="エコ・トラスト・ジャパン株式会社">
+              <option value="株式会社紀鳳産業">
+              <option value="コイズミ照明株式会社">
+              <option value="アイリスオーヤマ株式会社">
+              <option value="株式会社遠藤照明">
+              <option value="株式会社ルクス">
+              <option value="株式会社エコプラン">
+              <option value="岩崎電気株式会社">
+              <option value="株式会社関電工">
+              <option value="東光電気工事株式会社">
+              <option value="株式会社TKテクノサービス">
+              <option value="株式会社ティーネットジャパン">
+              <option value="株式会社三井造船昭島研究所">
+              <option value="ダイキンHVACソリューション東京株式会社">
+              <option value="有限会社南信堂">
+              <option value="株式会社リバティ">
+              <option value="株式会社フジクラエンジニアリング">
+              <option value="イーシームズ株式会社">
+            </datalist>
           </div>
           <div class="col-md-6">
-            <label for="contactSelect" class="form-label required">担当者</label>
-            <select id="contactSelect" name="contact" class="form-select" required>
-              <option value="">選択してください</option>
-              <option value="ishii">【ﾘｺｰ首都圏】石井 猛</option>
-              <option value="siga">【ﾘｺｰ首都圏】志賀 孝浩</option>
-              <option value="ymanaka">【新日通】山中 浩</option>
-              <option value="kobayashi">【ﾘｸﾞﾈｸｽﾄ】小林 一路</option>
-              <option value="someya">【いろは堂】染矢 剛</option>
-              <option value="hidaka">【いろは堂】日高 重夫</option>
-              <option value="okumoto">【いろは堂】奥本 哲也</option>
-              <option value="simamura">【いろは堂】島村 岳士</option>
-              <option value="sasakisyouhei">【ｶﾅﾃﾞﾝ】佐々木 翔平</option>
-              <option value="furutani">【ｶﾅﾃﾞﾝ】古谷 暁</option>
-              <option value="matuda">【ｶﾅﾃﾞﾝ】松田 壮亮</option>
-              <option value="sakaguchi">【ｶﾅﾃﾞﾝ】坂口 恭祐</option>
-              <option value="harada">【ｶﾅﾃﾞﾝ】原田 遼</option>
-              <option value="sato">【ｶﾅﾃﾞﾝ】佐藤 伸佳</option>
-              <option value="negisi">【ﾘｺｰ西東京】根岸 徹</option>
-              <option value="koyama">【ﾘｺｰ西東京】小山 恒治</option>
-              <option value="fujino">【ﾘｺｰ群馬】藤野 智史</option>
-              <option value="ikeda">【ﾘｺｰ群馬】池田 淳一</option>
-              <option value="tamura">【ﾘｺｰ群馬】田村</option>
-              <option value="watanabe">【ﾘｺｰ群馬】渡辺 和弘</option>
-              <option value="tonptsuka">【ｻｲﾎｰ】戸野塚 直樹</option>
-              <option value="imada">【ｻｲﾎｰ】今田 猛</option>
-              <option value="sakamoto">【ｻｲﾎｰ】坂本 憲司</option>
-              <option value="ogawa">【GNE】小川 佳彦</option>
-              <option value="yamada">【GNE】山田 浩貴</option>
-              <option value="oota">【GNE】太田</option>
-              <option value="kakimoto">【GNE】柿本</option>
-              <option value="namkamura">【GNE】中村</option>
-              <option value="takaoka">【GNE】高岡 裕</option>
-              <option value="fujimoto">【ｳﾑﾍﾞﾙﾄ】藤本 幸大</option>
-              <option value="yokota">【ｳﾑﾍﾞﾙﾄ】横田 晋宏</option>
-              <option value="hashimoto">【三井造船】橋本 聡明</option>
-              <option value="utimura">【ﾘｺｰ千葉】内村 嘉朗</option>
-              <option value="ishikawa">【ﾘｺｰ埼玉】石川</option>
-              <option value="ookubo">【ﾘｺｰ首都圏】大久保 博文</option>
-              <option value="akui">【ﾘｺｰ首都圏】安喰 和弘</option>
-              <option value="kobari">【ﾘｺｰ首都圏】小針 重雄</option>
-              <option value="aoki">【ﾘｺｰ首都圏】青木 正人</option>
-              <option value="nagami">【ﾘｺｰ首都圏】長見 篤也</option>
-              <option value="sakairi">【ﾘｺｰ神奈川】坂入</option>
-              <option value="sonota">その他</option>
-              <option value="sasakiyukio">佐々木幸夫</option>
-              <option value="negisit">ﾙｸｽ根岸 武彦</option>
-              <option value="serikawa">ﾙｸｽ糴川 毅史</option>
-              <option value="asakura">ﾙｸｽ朝倉 智孝</option>
-            </select>
+            <label for="contactInput" class="form-label required">担当者</label>
+            <input id="contactInput" name="contact" class="form-control" list="contactList" required placeholder="選択または入力してください" />
+            <datalist id="contactList">
+              <option value="【ﾘｺｰ首都圏】石井 猛"></option>
+              <option value="【ﾘｺｰ首都圏】志賀 孝浩"></option>
+              <option value="【新日通】山中 浩"></option>
+              <option value="【ﾘｸﾞﾈｸｽﾄ】小林 一路"></option>
+              <option value="【いろは堂】染矢 剛"></option>
+              <option value="【いろは堂】日高 重夫"></option>
+              <option value="【いろは堂】奥本 哲也"></option>
+              <option value="【いろは堂】島村 岳士"></option>
+              <option value="【ｶﾅﾃﾞﾝ】佐々木 翔平"></option>
+              <option value="【ｶﾅﾃﾞﾝ】古谷 暁"></option>
+              <option value="【ｶﾅﾃﾞﾝ】松田 壮亮"></option>
+              <option value="【ｶﾅﾃﾞﾝ】坂口 恭祐"></option>
+              <option value="【ｶﾅﾃﾞﾝ】原田 遼"></option>
+              <option value="【ｶﾅﾃﾞﾝ】佐藤 伸佳"></option>
+              <option value="【ﾘｺｰ西東京】根岸 徹"></option>
+              <option value="【ﾘｺｰ西東京】小山 恒治"></option>
+              <option value="【ﾘｺｰ群馬】藤野 智史"></option>
+              <option value="【ﾘｺｰ群馬】池田 淳一"></option>
+              <option value="【ﾘｺｰ群馬】田村"></option>
+              <option value="【ﾘｺｰ群馬】渡辺 和弘"></option>
+              <option value="【ｻｲﾎｰ】戸野塚 直樹"></option>
+              <option value="【ｻｲﾎｰ】今田 猛"></option>
+              <option value="【ｻｲﾎｰ】坂本 憲司"></option>
+              <option value="【GNE】小川 佳彦"></option>
+              <option value="【GNE】山田 浩貴"></option>
+              <option value="【GNE】太田"></option>
+              <option value="【GNE】柿本"></option>
+              <option value="【GNE】中村"></option>
+              <option value="【GNE】高岡 裕"></option>
+              <option value="【ｳﾑﾍﾞﾙﾄ】藤本 幸大"></option>
+              <option value="【ｳﾑﾍﾞﾙﾄ】横田 晋宏"></option>
+              <option value="【三井造船】橋本 聡明"></option>
+              <option value="【ﾘｺｰ千葉】内村 嘉朗"></option>
+              <option value="【ﾘｺｰ埼玉】石川"></option>
+              <option value="【ﾘｺｰ首都圏】大久保 博文"></option>
+              <option value="【ﾘｺｰ首都圏】安喰 和弘"></option>
+              <option value="【ﾘｺｰ首都圏】小針 重雄"></option>
+              <option value="【ﾘｺｰ首都圏】青木 正人"></option>
+              <option value="【ﾘｺｰ首都圏】長見 篤也"></option>
+              <option value="【ﾘｺｰ神奈川】坂入"></option>
+              <option value="その他"></option>
+              <option value="佐々木幸夫"></option>
+              <option value="ﾙｸｽ根岸 武彦"></option>
+              <option value="ﾙｸｽ糴川 毅史"></option>
+              <option value="ﾙｸｽ朝倉 智孝"></option>
+            </datalist>
           </div>
         </div>
       </fieldset>
