@@ -1,0 +1,23 @@
+/* 必須マーク */
+.required::after {
+  content: "（必須）";
+  color: red;
+  margin-left: 5px;
+}
+
+/* テーブルの高さ制限とスクロール */
+.table-responsive {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* フォーム備考の小文字スタイル */
+.form-note {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.form-note {
+  font-size: 0.8em;
+  color: #0d6efd; /* Bootstrapのprimaryブルー */
+}
