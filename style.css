@@ -1,3 +1,39 @@
+/* 必須ラベルの装飾 */
+label.required::after {
+  content: "（必須）";
+  color: red;
+  font-size: 0.85em;
+  margin-left: 4px;
+}
+
+/* 小さな説明文のサイズ */
+.text-note {
+  font-size: 0.85em;
+  color: #0d6efd; /* Bootstrapのprimaryカラー（青） */
+}
+
+/* Chrome, Safari, Edge 対応 */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox 対応 */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.section-divider {
+  border: none;
+  border-top: 2px solid #000000; /* 黒色で太さ2pxの実線 */
+  margin: 2rem 0;
+}
+
+.form-check-label {
+  margin-left: 0.25rem;
+}
+
 /* 必須マーク */
 .required::after {
   content: "（必須）";
