@@ -187,3 +187,9 @@ input[type=number] {
 .editing-row {
   background-color: #d4edda !important; /* 薄い緑色 */
 }
+
+/* ツールチップ */
+.question-icon {
+  color: rgb(143, 182, 249); /* 好きな色に変更 */
+  cursor: pointer; /* ホバー時にカーソルを手に */
+}

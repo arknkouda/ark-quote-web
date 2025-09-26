@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    
   const constructionForm = document.getElementById("constructionForm");
   const constructionTableBody = document.querySelector(".construction-scroll tbody");
   const unitSelect = document.getElementById("unitSelect");
@@ -14,42 +15,56 @@ document.addEventListener("DOMContentLoaded", function () {
   const koujiTypeAir = document.getElementById("koujiType2");
   const modal = document.getElementById("constructionModal");
 
-  const itemNameInput = constructionForm.querySelector('select[name="itemName"]'); // 項目名(select)
-  const basePriceInput = constructionForm.querySelector('input[name="basePrice"]'); // 基本単価(input)
+  const itemNameInput = constructionForm.querySelector('select[name="itemName"]');
+  const basePriceInput = constructionForm.querySelector('input[name="basePrice"]');
 
+ // ツールチェック
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+  const profitFields = {
+    day: document.querySelector('[name="profit_day"]'),
+    night: document.querySelector('[name="profit_night"]'),
+    high: document.querySelector('[name="profit_high"]'),
+    special: document.querySelector('[name="profit_special"]'),
+    waste: document.querySelector('[name="profit_waste"]'),
+    adjust: document.querySelector('[name="profit_adjust"]'),
+  };
+
+  const types = ['day', 'night', 'high', 'special', 'waste', 'adjust'];
   let rowCount = 1;
   let editingRow = null;
 
-  // 自動で「本数」を計算
+  // 利益の取得
+  function getProfit(type) {
+    const val = parseFloat(profitFields[type]?.value);
+    return isNaN(val) ? 0 : val;
+  }
+
+  // 本数自動計算
   modal.addEventListener("shown.bs.modal", function () {
-    const lightUseInput = modal.querySelector('input[name="lightUse"]');
-    const quantityInput = modal.querySelector('input[name="quantity"]');
-    const countInput = modal.querySelector('input[name="count"]');
-
     function updateCount() {
-      const lightUseVal = parseFloat(lightUseInput.value);
-      const quantityVal = parseFloat(quantityInput.value);
-      const isElectric = koujiTypeElectric && koujiTypeElectric.checked;
+      const lightUseVal = parseFloat(lightUse.value);
+      const quantityVal = parseFloat(quantity.value);
+      const isElectric = koujiTypeElectric?.checked;
 
-      if (!isElectric || isNaN(lightUseVal) || lightUseInput.value.trim() === "") {
-        countInput.value = "";
+      if (!isElectric || isNaN(lightUseVal)) {
+        count.value = "";
         return;
       }
 
-      if (!isNaN(lightUseVal) && !isNaN(quantityVal)) {
-        countInput.value = lightUseVal * quantityVal;
-      } else {
-        countInput.value = "";
-      }
+      count.value = (!isNaN(quantityVal)) ? (lightUseVal * quantityVal) : "";
     }
 
-    lightUseInput.addEventListener("input", updateCount);
-    quantityInput.addEventListener("input", updateCount);
-    koujiTypeElectric.addEventListener("change", updateCount);
-    koujiTypeAir.addEventListener("change", updateCount);
+    lightUse.addEventListener("input", updateCount);
+    quantity.addEventListener("input", updateCount);
+    koujiTypeElectric?.addEventListener("change", updateCount);
+    koujiTypeAir?.addEventListener("change", updateCount);
   });
 
-  // 登録処理
+  // 行追加・編集
   constructionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -57,23 +72,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const content = contentSelect.value;
 
     if (editingRow) {
-      const cells = editingRow.children;
-      cells[2].textContent = itemNameInput.value;
-      cells[3].textContent = lightUse.value;
-      cells[4].textContent = quantity.value;
-      cells[5].textContent = unit;
-      cells[6].textContent = content;
-      cells[7].textContent = count.value;
-      cells[8].textContent = basePrice.value;
-      cells[15].textContent = fixedPrice.value;
-      cells[16].textContent = ""; // 小計は削除
-
-      editingRow.classList.remove("table-success");
+      // 編集処理（省略可）
       editingRow = null;
     } else {
       const tr = document.createElement("tr");
 
-      tr.innerHTML = `
+      // 利益用のチェックボックスカラム作成
+      const profitCheckboxes = types.map(type =>
+        `<td><input type="checkbox" class="coeffCheck" data-type="${type}"></td>`
+      ).join("");
+
+     tr.innerHTML = `
         <td>
           <button class="btn btn-sm btn-success edit-row">編集</button>
           <button class="btn btn-sm btn-danger delete-row ms-1">削除</button>
@@ -85,19 +94,20 @@ document.addEventListener("DOMContentLoaded", function () {
         <td>${unit}</td>
         <td>${content}</td>
         <td>${count.value}</td>
-        <td>${basePrice.value}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>${fixedPrice.value}</td> <!-- 確定単価 -->
+        <td><input type="number" name="basePrice" class="form-control" value="${basePrice.value}"></td>
+
+        <td><input type="text" class="form-control confirmedInput" data-type="dayConfirmed" readonly></td>
+        <td><input type="text" class="form-control confirmedInput" data-type="nightConfirmed" readonly></td>
+        <td><input type="text" class="form-control confirmedInput" data-type="highConfirmed" readonly></td>
+        <td><input type="text" class="form-control confirmedInput" data-type="specialConfirmed" readonly></td>
+        <td><input type="text" class="form-control confirmedInput" data-type="wasteConfirmed" readonly></td>
+        <td><input type="text" class="form-control confirmedInput" data-type="adjustConfirmed" readonly></td>
+
+        <td><input type="text" class="form-control totalConfirmedPrice" readonly></td>
         <td></td> <!-- 小計 -->
-        <td>
-          <input type="checkbox" class="row-coeff" />
-        </td> <!-- 係数 -->
+        <td><input type="checkbox" name="coefficient" /></td>
       `;
+
 
       const emptyRow = constructionTableBody.querySelector("tr td[colspan]");
       if (emptyRow) emptyRow.parentElement.remove();
@@ -109,40 +119,91 @@ document.addEventListener("DOMContentLoaded", function () {
     unitSelect.value = "";
     contentSelect.value = "";
 
-    const modalInstance = bootstrap.Modal.getInstance(document.getElementById("constructionModal"));
-    modalInstance.hide();
+    bootstrap.Modal.getInstance(modal).hide();
+    updateRowNumbers();
+    calculateConfirmedPrices();
   });
 
-  // 行番号の再計算と空行挿入
+  // 利益計算ロジック
+  function calculateConfirmedPrices() {
+  constructionTableBody.querySelectorAll("tr").forEach(row => {
+    // 基本単価を取得（input[name="basePrice"]）
+    const basePriceInput = row.querySelector('input[name="basePrice"]');
+    if (!basePriceInput) return;
+
+    const basePrice = parseFloat(basePriceInput.value) || 0;
+    let totalConfirmed = 0;
+
+    // 各利益タイプごとのチェックと計算
+    types.forEach(type => {
+      const profit = getProfit(type); // フォーム上部の利益率を取得
+      const checkbox = row.querySelector(`.coeffCheck[data-type="${type}"]`);
+      const confirmedInput = row.querySelector(`.confirmedInput[data-type="${type}Confirmed"]`);
+      const coeffCheckbox = row.querySelector('input[name="coefficient"]');
+
+      const isChecked = checkbox?.checked;
+      const isCoeffChecked = coeffCheckbox?.checked;
+
+      if (confirmedInput) {
+        if (isChecked || isCoeffChecked) {
+          const confirmed = basePrice * profit;
+          confirmedInput.value = confirmed.toFixed(0); // 四捨五入
+          totalConfirmed += confirmed;
+        } else {
+          confirmedInput.value = '';
+        }
+      }
+    });
+
+    // 合計（確定単価）を入力
+    const totalConfirmedInput = row.querySelector('.totalConfirmedPrice');
+    if (totalConfirmedInput) {
+      totalConfirmedInput.value = totalConfirmed.toFixed(0);
+    }
+  });
+}
+
+
+  // 利益入力欄の変更時に再計算
+Object.values(profitFields).forEach(input => {
+  input.addEventListener("input", calculateConfirmedPrices);
+});
+
+// 行内チェックボックスや係数チェックボックス変更でも再計算
+document.addEventListener("input", e => {
+  if (
+    e.target.matches('.coeffCheck') ||
+    e.target.matches('input[name="coefficient"]') ||
+    e.target.matches('input[name="basePrice"]')
+  ) {
+    calculateConfirmedPrices();
+  }
+});
+
+
+  // 行番号更新
   function updateRowNumbers() {
     const rows = constructionTableBody.querySelectorAll("tr");
     rowCount = 1;
-
     rows.forEach(row => {
-      const noCell = row.querySelector("td:nth-child(2)");
-      if (noCell) noCell.textContent = rowCount++;
+      const cell = row.querySelector("td:nth-child(2)");
+      if (cell) cell.textContent = rowCount++;
     });
 
     if (rows.length === 0) {
-      constructionTableBody.innerHTML = `
-        <tr>
-          <td colspan="19">データ未入力</td>
-        </tr>
-      `;
+      constructionTableBody.innerHTML = `<tr><td colspan="19">データ未入力</td></tr>`;
     }
   }
 
-  // 自動セット用の関数
+  // 基本単価 自動セット
   function updateBasePrice() {
     const itemName = itemNameInput.value.trim();
     const content = contentSelect.value;
 
-    if ((itemName === "照明40W" || itemName === "照明20W")) {
-      if (content === "交換工事") {
-        basePriceInput.value = "3500";
-      } else {
-        basePriceInput.value = "1500";
-      }
+    if ((itemName === "照明40W" || itemName === "照明20W") && content === "交換工事") {
+      basePriceInput.value = "3500";
+    } else if (itemName === "照明40W" || itemName === "照明20W") {
+      basePriceInput.value = "1500";
     } else {
       basePriceInput.value = "";
     }
@@ -150,137 +211,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   itemNameInput.addEventListener("input", updateBasePrice);
   contentSelect.addEventListener("change", updateBasePrice);
+
+  // 初期実行
+  updateBasePrice();
+  calculateConfirmedPrices();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const profitInputs = {
-    day: document.querySelector('input[name="profit_day"]'),
-    night: document.querySelector('input[name="profit_night"]'),
-    high: document.querySelector('input[name="profit_high"]'),
-    special: document.querySelector('input[name="profit_special"]'),
-    waste: document.querySelector('input[name="profit_waste"]'),
-    adjust: document.querySelector('input[name="profit_adjust"]'),
-  };
-
-  const tbody = document.querySelector(".construction-scroll tbody");
-
-  // 係数のチェックボックス（ヘッダーに1個ずつ）
-  const coeffChecks = document.querySelectorAll(".coeffCheck"); // 係数のチェックボックス
-
-  function toNumber(value) {
-    const n = parseFloat(value);
-    return isNaN(n) ? 0 : n;
-  }
-
-  function roundUp10yen(num) {
-    return Math.ceil(num / 10) * 10;
-  }
-
-  // 計算を実行
-  function updateAllRows() {
-    const coeffChecked = {};
-    coeffChecks.forEach(chk => {
-      const type = chk.dataset.type;
-      coeffChecked[type] = chk.checked;
-    });
-
-    const types = ["day", "night", "high", "special", "waste", "adjust"];
-    const columnIndexMap = {
-      day: 9,
-      night: 10,
-      high: 11,
-      special: 12,
-      waste: 13,
-      adjust: 14,
-    };
-
-  document.addEventListener("DOMContentLoaded", () => {
-  const profitInputs = {
-    day: document.querySelector('input[name="profit_day"]'),
-    night: document.querySelector('input[name="profit_night"]'),
-    high: document.querySelector('input[name="profit_high"]'),
-    special: document.querySelector('input[name="profit_special"]'),
-    waste: document.querySelector('input[name="profit_waste"]'),
-    adjust: document.querySelector('input[name="profit_adjust"]'),
-  };
-
-  const tbody = document.querySelector(".construction-scroll tbody");
-  const coeffChecks = document.querySelectorAll(".coeffCheck"); // 係数のチェックボックス
-
-  function toNumber(value) {
-    const n = parseFloat(value);
-    return isNaN(n) ? 0 : n;
-  }
-
-  function roundUp10yen(num) {
-    return Math.ceil(num / 10) * 10;
-  }
-
-  // 計算を実行
-  function updateAllRows() {
-    const coeffChecked = {};
-    coeffChecks.forEach(chk => {
-      const type = chk.dataset.type;
-      coeffChecked[type] = chk.checked;
-    });
-
-    const types = ["day", "night", "high", "special", "waste", "adjust"];
-    const columnIndexMap = {
-      day: 9,
-      night: 10,
-      high: 11,
-      special: 12,
-      waste: 13,
-      adjust: 14,
-    };
-
-    // 施工内容の行を一つ一つ処理
-    document.querySelectorAll(".construction-scroll tbody tr").forEach(row => {
-      const basePrice = parseFloat(row.children[8]?.textContent) || 0;
-      if (basePrice <= 0) {
-        row.children[15].textContent = "0"; // 確定単価
-        types.forEach(type => {
-          const idx = columnIndexMap[type];
-          if (row.children[idx]) row.children[idx].textContent = "0"; // 利益項目（昼間、夜間、など）の列
-        });
-        return;
-      }
-
-      let total = 0;
-
-      types.forEach(type => {
-        const idx = columnIndexMap[type];
-        const profitVal = parseFloat(profitInputs[type]?.value) || 0;
-        const rowCheck = row.querySelector(`input.row-check[data-type="${type}"]`);
-        const rowChecked = rowCheck?.checked ?? false;
-
-        if (profitVal > 0 && (rowChecked || coeffChecked[type])) {
-          const calc = roundUp10yen(basePrice * profitVal);
-          total += calc;
-          if (row.children[idx]) {
-            row.children[idx].textContent = calc;
-          }
-        } else {
-          if (row.children[idx]) {
-            row.children[idx].textContent = "0";
-          }
-        }
-      });
-
-      // 確定単価に合計を設定
-      row.children[15].textContent = total > 0 ? total : "0"; // 確定単価
-    });
-  }
-
-  // イベント設定（利益入力、施工内容チェック、係数チェック）
-  Object.values(profitInputs).forEach(input => input.addEventListener("input", updateAllRows));
-  tbody.addEventListener("change", (e) => {
-    if (e.target.classList.contains("row-check")) updateAllRows();
-  });
-  coeffChecks.forEach(chk => chk.addEventListener("change", updateAllRows));
-
-  // 最初に一回計算
-  updateAllRows();
-});
-
-  }})
