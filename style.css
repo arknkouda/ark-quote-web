@@ -23,6 +23,7 @@ input[type=number]::-webkit-inner-spin-button {
 /* Firefox 対応 */
 input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;      /* モダンな標準対応 */
 }
 
 /* 線 */
