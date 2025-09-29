@@ -24,6 +24,36 @@ document.addEventListener("DOMContentLoaded", function () {
       return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 
+// 高所作業車テーブルの自動計算ロジック
+const tableRows = document.querySelectorAll('table tbody tr');
+
+tableRows.forEach(row => {
+  const qtyInput = row.cells[2]?.querySelector('input');
+  const unitPriceInput = row.cells[4]?.querySelector('input');
+  const transportInput = row.cells[5]?.querySelector('input');
+  const totalUnitInput = row.cells[6]?.querySelector('input');
+  const subtotalInput = row.cells[7]?.querySelector('input');
+
+  if (!qtyInput || !unitPriceInput || !transportInput || !totalUnitInput || !subtotalInput) return;
+
+  const updateRow = () => {
+    const qty = parseFloat(qtyInput.value) || 0;
+    const unitPrice = parseFloat(unitPriceInput.value) || 0;
+    const transport = parseFloat(transportInput.value) || 0;
+
+    const totalUnit = unitPrice + transport;
+    const subtotal = qty * totalUnit;
+
+    totalUnitInput.value = totalUnit ? totalUnit.toFixed(0) : '';
+    subtotalInput.value = subtotal ? subtotal.toFixed(0) : '';
+  };
+
+  [qtyInput, unitPriceInput, transportInput].forEach(input => {
+    input.addEventListener('input', updateRow);
+  });
+});
+
+   // 昼間,夜間,高所,特殊,産廃等,微調整 
   const profitFields = {
     day: document.querySelector('[name="profit_day"]'),
     night: document.querySelector('[name="profit_night"]'),

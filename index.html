@@ -443,7 +443,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
-            <h3>A材：照明器具・空調器具・商品等</h3>
+            <h3>A材:照明器具・空調器具・商品等</h3>
             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-inputModal">新規入力</button>
           </div>
 
@@ -557,12 +557,12 @@
                     <div class="col-md-3">
                       <label class="form-label">単価</label>
                       <input type="number" class="form-control" id="modal-unitPrice">
-                      <div class="form-note">※入値に応じて、1.3倍した定価を100円単位で自動入力されます。</div>
+                      <div class="text-note">※入値に応じて、1.3倍した定価を100円単位で自動入力されます。</div>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">金額</label>
                       <input type="number" class="form-control" id="modal-amount">
-                      <div class="form-note">※単価が入力されている場合のみ、単価×数量で表示されます。</div>
+                      <div class="text-note">※単価が入力されている場合のみ、単価×数量で表示されます。</div>
                     </div>
 
                     <div class="col-md-12">
@@ -575,12 +575,12 @@
                     <div class="col-md-3">
                       <label class="form-label required">定価</label>
                       <input type="number" class="form-control" id="modal-listPrice" required>
-                      <div class="form-note">※定価がわからない場合のみオープン価格で入力してください。</div>
+                      <div class="text-note">※定価がわからない場合のみオープン価格で入力してください。</div>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">定価合計</label>
                       <input type="number" class="form-control" id="modal-listTotal">
-                      <div class="form-note">※数量×定価で表示されます。計算できない場合、単価×数量で表示されます。</div>
+                      <div class="text-note">※数量×定価で表示されます。計算できない場合、単価×数量で表示されます。</div>
                     </div>
 
                     <div class="col-md-3">
@@ -590,18 +590,18 @@
                     <div class="col-md-3">
                       <label class="form-label">入値合計</label>
                       <input type="number" class="form-control" id="modal-costTotal">
-                      <div class="form-note">※数量が入力されている場合は入値×数量。未入力の場合は「入値×個数」で表示されます。</div>
+                      <div class="text-note">※数量が入力されている場合は入値×数量。未入力の場合は「入値×個数」で表示されます。</div>
                     </div>
 
                     <div class="col-md-3">
                       <label class="form-label">入値率</label>
                       <input type="text" class="form-control" id="modal-costRate">
-                      <div class="form-note">※入値 ÷ 定価 ×100％で表示されます。割り戻しエラー時は空欄になります。</div>
+                      <div class="text-note">※入値 ÷ 定価 ×100％で表示されます。割り戻しエラー時は空欄になります。</div>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">売値率</label>
                       <input type="text" class="form-control" id="modal-sellRate">
-                      <div class="form-note">※単価 ÷ 定価 ×100％で表示されます。割り戻しエラー時は空欄になります。</div>
+                      <div class="text-note">※単価 ÷ 定価 ×100％で表示されます。割り戻しエラー時は空欄になります。</div>
                     </div>
 
                     <hr class="section-divider">
@@ -641,8 +641,8 @@
               </div>
             </div>
           </div>
-          </div>
-        </div>
+      </div>
+    </div>
 
 
     
@@ -696,7 +696,7 @@
               </div>
             </div>
 
-              <!-- 項目テーブル -->
+              <!-- 高所作業車テーブル -->
               <div class="table-responsive mb-4">
                 <table class="table table-bordered align-middle text-center">
                   <thead class="table-secondary">
@@ -1231,7 +1231,7 @@
                     <form id="constructionForm">
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          <label class="form-label">項目名 <span class="text-danger">（必須）</span></label>
+                          <label class="form-label required">項目名</label>
                           <select class="form-control" name="itemName" required>
                             <option value="">選択してください</option>
                             <option value="照明40W">照明40W</option>
@@ -1262,11 +1262,11 @@
 
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          <label class="form-label">台数/本数 <span class="text-danger">（必須）</span></label>
+                          <label class="form-label required">台数/本数</label>
                           <input type="number" class="form-control" name="quantity" required>
                         </div>
                         <div class="col-md-6">
-                          <label class="form-label">単位 <span class="text-danger">（必須）</span></label>
+                          <label class="form-label required">単位</label>
                           <select class="form-control" id="unitSelect" name="unit" required>
                             <option value="">選択してください</option>
                             <option value="台">台</option>
@@ -1279,7 +1279,7 @@
 
                       <div class="row mb-3">
                         <div class="col-md-6">
-                          <label class="form-label">内容 <span class="text-danger">（必須）</span></label>
+                          <label class="form-label required">内容</label>
                           <select class="form-control" id="contentSelect" name="content" required>
                             <option value="">選択してください</option>
                             <option value="結線工事">結線工事</option>
